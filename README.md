@@ -8,3 +8,7 @@ Entorns de Desenrotllament
 
 Programa exemple per activitat de Github amb Python
 
+## Cambio de llenar todos los cubos
+
+Cambio realizado el 10 de mayo a las 18:24
+
