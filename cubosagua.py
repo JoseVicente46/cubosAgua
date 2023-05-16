@@ -1,15 +1,28 @@
 import sys
 
-
 class juegoCubos:
+    """
+        .. include:: ./README.md
+    """
     pasos = 0
     aguaEnCubos = {'8': 0, '5': 0, '3': 0}
 
+    """
+    Esta es la clase que crea los cubos
+    """
     def __init__(self, fobjetivo):
+        """
+        Este es el constructor de la clase juegoCubos
+        :param fobjetivo: Char
+        """
         self.objetivo = fobjetivo
 
     def genStrCubos(self):
-
+        """
+        Esta funcion crea la estructura de los cubos, dependiendo de si estan llenos o vacios los pone de una forma o
+        de otra
+        :return: String con los cubos
+        """
         caracterAgua = '~'
         visualizadorCubos = []
 
@@ -46,12 +59,20 @@ class juegoCubos:
         '''.format(*visualizadorCubos)
 
     def mostrarEstadoCubos(self):
+        """
+        Muestra el objetivo del juego y el estado de los cubos (como de llenos/vacios estan)
+        :return: String
+        """
         print()
         print('Intenta conseguir ' + str(self.objetivo) + ' litros de agua en uno de estos cubos')
         print(self.genStrCubos())
 
     def checkObjetivo(self):
         # Comprueba si uno de los cubos ha conseguido el objetivo
+        """
+        Comprueba si has conseguido el objetivo
+        :return: String
+        """
         for cantidadAgua in self.aguaEnCubos.values():
             if cantidadAgua == self.objetivo:
                 print('Bien hecho! Lo has resuelto en', self.pasos, 'pasos!')
@@ -59,6 +80,10 @@ class juegoCubos:
 
     def selecOpcion(self):
         # Selección de una opción
+        """
+        Te printea el menu con las opciones para que elijas
+        :return: Char
+        """
         print('Elige una opción:')
         print('  (T)odos los cubos llenos')
         print('  (L)lenar un cubo')
@@ -78,6 +103,11 @@ class juegoCubos:
                 return move
 
     def selecCubo(self, mensaje):
+        """
+        El menu que te dice hacia que cubo quieres dirijir la accion
+        :param mensaje:String
+        :return: Char
+        """
         while True:
             print(mensaje)
             cuboOrigen = input('> ').upper()
@@ -86,15 +116,31 @@ class juegoCubos:
                 return cuboOrigen
 
     def llenarCubo(self, cuboOrigen):
+        """
+        Llena el cubo seleccionado hasta su tamaño maximo
+        :param cuboOrigen:Char
+        :return: Int
+        """
         cuboOrigenTam = int(cuboOrigen)
         self.aguaEnCubos[cuboOrigen] = cuboOrigenTam
         self.pasos += 1
 
     def vaciarCubo(self, cuboOrigen):
+        """
+        Vacia el cubo seleccionado
+        :param cuboOrigen: Char
+        :return: nada
+        """
         self.aguaEnCubos[cuboOrigen] = 0
         self.pasos += 1
 
     def moverCubo(self, cuboOrigen, cuboDestino):
+        """
+        Mueve el agua de un cubo a otro
+        :param cuboOrigen: Char
+        :param cuboDestino: Char
+        :return: nada
+        """
         cuboDestinoTam = int(cuboDestino)
         espacioVacioCuboDestino = cuboDestinoTam - self.aguaEnCubos[cuboDestino]
         aguaEnCuboOrigen = self.aguaEnCubos[cuboOrigen]
@@ -108,6 +154,10 @@ class juegoCubos:
         self.pasos += 1
 
     def jugar(self):
+        """
+        Dependiendo de la opcion que hayas selecionado hace una u otra opcion
+        :return: nada
+        """
         self.mostrarEstadoCubos()
         while True:
             opcion = self.selecOpcion()
